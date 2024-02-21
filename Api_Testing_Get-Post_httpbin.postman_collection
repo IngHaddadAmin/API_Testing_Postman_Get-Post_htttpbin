@@ -1,0 +1,114 @@
+{
+	"info": {
+		"_postman_id": "792306ff-34c0-45a8-b0eb-3c7dd6e53a42",
+		"name": "httpbin",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31632836",
+		"_collection_link": "https://red-comet-161925.postman.co/workspace/da2f3bdb-ff86-4aa2-99e9-4217d0a1c5e3/collection/31632836-792306ff-34c0-45a8-b0eb-3c7dd6e53a42?action=share&source=collection_link&creator=31632836"
+	},
+	"item": [
+		{
+			"name": "firstTest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "httpbin.org",
+					"host": [
+						"httpbin",
+						"org"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get uuid and set",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let rspnc = pm.response.json();\r",
+							"pm.globals.set(\"uuid\", rspnc.uuid);\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "httpbin.org/uuid",
+					"host": [
+						"httpbin",
+						"org"
+					],
+					"path": [
+						"uuid"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "postRequest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"haddadamino@gmail.com\",\r\n    \"name\" : \"Amin\"\r\n}"
+				},
+				"url": {
+					"raw": "httpbin.org/post?actuuid={{uuid}}",
+					"host": [
+						"httpbin",
+						"org"
+					],
+					"path": [
+						"post"
+					],
+					"query": [
+						{
+							"key": "actuuid",
+							"value": "{{uuid}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
